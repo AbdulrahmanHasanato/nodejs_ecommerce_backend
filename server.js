@@ -17,7 +17,7 @@ const mountRoutes = require("./routes");
 //Connect with DB
 dbConnection();
 
-//Express app
+//Express apps
 const app = express();
 
 //Allow other domains to access the application
