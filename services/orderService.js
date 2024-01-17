@@ -173,7 +173,7 @@ const createCardOrder = async (session) => {
         totalOrderPrice: oderPrice,
         isPaid: true,
         paidAt: Date.now(),
-        paymentMethodType: "card",
+        paymentMethodType: "Credit Card",
     });
 
     // 4) After creating order, decrement product quantity, increment product sold
