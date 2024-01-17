@@ -10,6 +10,7 @@ dotenv.config({ path: "config.env" });
 const dbConnection = require("./config/database");
 const ApiError = require("./utils/apiError");
 const globalError = require("./middlewares/errorMiddleware");
+const webhookCheckout = require("./services/orderService");
 
 // Mount Routes
 const mountRoutes = require("./routes");
@@ -27,6 +28,9 @@ app.options("*", cors());
 //Compress all responses
 app.use(compression());
 
+//Checkout webhook
+app.post("/webhook-checkout", express.raw({ type: "application/json" }), webhookCheckout);
+
 //Middlewares
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "uploads")));
@@ -37,7 +41,6 @@ if (process.env.NODE_ENV === "development") {
 }
 
 mountRoutes(app);
-
 app.all("*", (req, res, next) => {
     next(new ApiError(`Can't find this route: ${req.originalUrl}`, 400));
 });
