@@ -10,10 +10,10 @@ dotenv.config({ path: "config.env" });
 const dbConnection = require("./config/database");
 const ApiError = require("./utils/apiError");
 const globalError = require("./middlewares/errorMiddleware");
-const webhookCheckout = require("./services/orderService");
 
 // Mount Routes
 const mountRoutes = require("./routes");
+const { webhookCheckout } = require("./services/orderService");
 
 //Connect with DB
 dbConnection();
